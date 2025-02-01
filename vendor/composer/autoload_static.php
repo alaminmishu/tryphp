@@ -30,6 +30,15 @@ class ComposerStaticInit026509606a55be5c56c243e48adc6597
         array (
             'voku\\' => 5,
         ),
+        'Z' => 
+        array (
+            'Zeuxisoo\\Whoops\\Slim\\Tests\\' => 27,
+            'Zeuxisoo\\Whoops\\Slim\\' => 21,
+        ),
+        'W' => 
+        array (
+            'Whoops\\' => 7,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php83\\' => 23,
@@ -103,6 +112,18 @@ class ComposerStaticInit026509606a55be5c56c243e48adc6597
         'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
+        'Zeuxisoo\\Whoops\\Slim\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zeuxisoo/slim-whoops/tests',
+        ),
+        'Zeuxisoo\\Whoops\\Slim\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zeuxisoo/slim-whoops/src/Zeuxisoo/Whoops/Slim',
+        ),
+        'Whoops\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
         'Symfony\\Polyfill\\Php83\\' => 
         array (

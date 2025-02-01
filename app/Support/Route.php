@@ -1,9 +1,11 @@
 <?php
 
+
 namespace App\Support;
 
 use Illuminate\Support\Str;
 use Slim\App;
+
 class Route
 {
     public static App $app;
@@ -18,6 +20,7 @@ class Route
     public static function __callStatic($verb, $parameters)
     {
         $app = self::$app;
+
         [$route, $action] = $parameters;
 
         self::validation($route, $verb, $action);
@@ -26,16 +29,15 @@ class Route
             ? $app->$verb($route, $action)
             : $app->$verb($route, self::resolveViaController($action));
     }
+
     public static function resolveViaController($action)
     {
         $class = Str::before($action, '@');
         $method = Str::after($action, '@');
 
-        $controllerNamespace = 'App\\Http\\Controllers\\';
-        $controller = $controllerNamespace . $class;
+        $controller = config('routing.controllers.namespace') . $class;
 
-//        $controller = config('routing.controller.namespace') . $class;
-
+        return [$controller, $method];
     }
 
     protected static function validation($route, $verb, $action)
@@ -46,5 +48,4 @@ class Route
 
         throw_when($fails, $exception . $context);
     }
-
 }
