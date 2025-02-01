@@ -67,6 +67,7 @@ class ComposerStaticInit026509606a55be5c56c243e48adc6597
             'Illuminate\\Pipeline\\' => 20,
             'Illuminate\\Filesystem\\' => 22,
             'Illuminate\\Events\\' => 18,
+            'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
             'Illuminate\\Config\\' => 18,
@@ -87,6 +88,10 @@ class ComposerStaticInit026509606a55be5c56c243e48adc6597
         array (
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
+        ),
+        'B' => 
+        array (
+            'Brick\\Math\\' => 11,
         ),
         'A' => 
         array (
@@ -196,6 +201,10 @@ class ComposerStaticInit026509606a55be5c56c243e48adc6597
         array (
             0 => __DIR__ . '/..' . '/illuminate/events',
         ),
+        'Illuminate\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/database',
+        ),
         'Illuminate\\Contracts\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/contracts',
@@ -239,6 +248,10 @@ class ComposerStaticInit026509606a55be5c56c243e48adc6597
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
+        'Brick\\Math\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brick/math/src',
         ),
         'App\\' => 
         array (

@@ -30,6 +30,7 @@ return array(
     'Illuminate\\Pipeline\\' => array($vendorDir . '/illuminate/pipeline'),
     'Illuminate\\Filesystem\\' => array($vendorDir . '/illuminate/filesystem'),
     'Illuminate\\Events\\' => array($vendorDir . '/illuminate/events'),
+    'Illuminate\\Database\\' => array($vendorDir . '/illuminate/database'),
     'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
     'Illuminate\\Container\\' => array($vendorDir . '/illuminate/container'),
     'Illuminate\\Config\\' => array($vendorDir . '/illuminate/config'),
@@ -41,5 +42,6 @@ return array(
     'DI\\' => array($vendorDir . '/php-di/php-di/src'),
     'Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
+    'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'App\\' => array($baseDir . '/app'),
 );
