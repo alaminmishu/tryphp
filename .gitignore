@@ -2,3 +2,5 @@
 .idea
 vendor/
 larament/
+laravel-react-crud/
+setup_zsh.sh
