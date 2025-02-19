@@ -1,6 +1,8 @@
 .ddev
 .idea
-vendor/
 larament/
 laravel-react-crud/
+pestPhp/
+unitTest/
+vendor/
 setup_zsh.sh
