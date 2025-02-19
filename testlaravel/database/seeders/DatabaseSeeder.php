@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Collection;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +16,90 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $roles = $this->createRoles();
+        $permissions = $this->createPermissions();
+        $this->assignPermissionsToRoles($roles, $permissions);
+        $users = $this->createUsers();
+        $this->assignRolesToUsers($users, $roles);
+    }
+    private function createRoles(): array
+    {
+        return [
+            'admin' => Role::firstOrCreate(['name' => 'admin']),
+            'author' => Role::firstOrCreate(['name' => 'author']),
+            'viewer' => Role::firstOrCreate(['name' => 'viewer']),
+        ];
+    }
+    private function createPermissions(): Collection
+    {
+        $permissionNames = [
+            'create post',
+            'read post',
+            'edit post',
+            'delete post',
+        ];
+        foreach ($permissionNames as $name) {
+            Permission::firstOrCreate(['name' => $name]);
+        }
+        return Permission::all();
+    }
+    private function assignPermissionsToRoles(array $roles, Collection $permissions): void
+    {
+        // Assign all permissions to author role
+        $roles['author']->syncPermissions($permissions);
+        // Assign only read post permission to viewer role
+        $roles['viewer']->syncPermissions($permissions->firstWhere('name', 'read post'));
+    }
+    private function createUsers(): array
+    {
+        $users = [
+            [
+                'name' => 'Admin',
+                'email' => 'admin@example.com',
+                'password' => 'password',
+                'role' => 'admin',
+            ],
+            [
+                'name' => 'Author',
+                'email' => 'author@example.com',
+                'password' => 'password',
+                'role' => 'author',
+            ],
+            [
+                'name' => 'Author 1',
+                'email' => 'author1@example.com',
+                'password' => 'password',
+                'role' => 'author',
+            ],
+            [
+                'name' => 'Viewer',
+                'email' => 'viewer@example.com',
+                'password' => 'password',
+                'role' => 'viewer',
+            ],
+        ];
+        $createUsers = [];
+        foreach ($users as $userData) {
+            $user = User::create([
+                'name' => $userData['name'],
+                'email' => $userData['email'],
+                'password' => bcrypt($userData['password']),
+            ]);
+            // Store users in a nested array structure
+            if (!isset($createUsers[$userData['role']])) {
+                $createUsers[$userData['role']] = [];
+            }
+            $createUsers[$userData['role']][] = $user;
+        }
+        return $createUsers;
+    }
+    private function assignRolesToUsers(array $users, array $roles): void
+    {
+        foreach ($users as $role => $roleUsers) {
+            // Handle multiple users per role
+            foreach ($roleUsers as $user) {
+                $user->assignRole($roles[$role]);
+            }
+        }
     }
 }
