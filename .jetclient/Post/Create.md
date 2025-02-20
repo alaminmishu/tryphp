@@ -10,12 +10,13 @@ key = 'Accept'
 value = 'application/json'
 
 [auth.bearer]
-token = '1|JqWWxV7ztrU1lRo3FfBg2BwUeakkWI6EfaUlto7j98c1a76d'
+token = 'rBC68JhHxifgrdFBTdlYxyerX0HritWpGlT1V4XI82f1fb02'
 
 [body]
 type = 'JSON'
 raw = '''
 {
-  
+  "title": "Post 2",
+  "content": "Content 2"
 }'''
 ```

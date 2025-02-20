@@ -13,7 +13,7 @@ value = 'application/json'
 type = 'JSON'
 raw = '''
 {
-  "email": "author@example.com",
+  "email": "author1@example.com",
   "password": "password"
 }'''
 ```

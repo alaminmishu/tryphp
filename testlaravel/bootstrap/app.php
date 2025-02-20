@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Validation\ValidationException;
+use Inspector\Laravel\Middleware\WebRequestMonitoring;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
@@ -30,6 +31,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
+
+        $middleware->appendToGroup('web', WebRequestMonitoring::class)
+            ->appendToGroup('api', WebRequestMonitoring::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function(ModelNotFoundException $e) {
@@ -68,7 +72,9 @@ return Application::configure(basePath: dirname(__DIR__))
                 'success' => false,
                 'message' => 'An error occurred',
                 'error' => $e->getMessage(),
-                'error_detail' => $e->getFile(),
+                'error_file' => $e->getFile(),
+                'error_line' => $e->getLine(),
+
             ], 500);
         });
     })->create();
