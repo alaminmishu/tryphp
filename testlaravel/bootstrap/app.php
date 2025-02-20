@@ -68,6 +68,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 'success' => false,
                 'message' => 'An error occurred',
                 'error' => $e->getMessage(),
+                'error_detail' => $e->getFile(),
             ], 500);
         });
     })->create();

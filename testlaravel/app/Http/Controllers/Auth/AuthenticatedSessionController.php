@@ -15,7 +15,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(Request $request): JsonResponse
+    public function store(LoginRequest $request): JsonResponse
     {
         $validatedData = $request->validate([
             'email' => ['required', 'string', 'email'],

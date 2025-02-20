@@ -13,7 +13,7 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('read post')
+        return $user->can('read post');
     }
 
     /**
