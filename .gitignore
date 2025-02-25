@@ -1,5 +1,6 @@
 .ddev
 .idea
+.vscode
 vendor/
 larament/
 laravel-react-crud/
