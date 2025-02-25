@@ -3,4 +3,7 @@
 vendor/
 larament/
 laravel-react-crud/
+pestphp/
+testlaravel/
+unitTest/
 setup_zsh.sh
