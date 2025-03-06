@@ -2,6 +2,7 @@
 .idea
 .vscode
 breeze-next/
+l10_breeze_vue/*
 larament/
 laravel-react-crud/
 pestPhp/
