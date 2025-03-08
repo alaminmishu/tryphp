@@ -1,8 +1,13 @@
 .ddev
 .idea
+.vscode
+breeze-next/
+l10/
+l10_breeze_vue/
 larament/
 laravel-react-crud/
 pestPhp/
+testlaravel/
 unitTest/
 vendor/
 setup_zsh.sh
