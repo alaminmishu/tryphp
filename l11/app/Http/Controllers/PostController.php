@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Http\Requests\Post\StoreRequest;
 
 class PostController extends Controller
 {
@@ -20,6 +21,7 @@ class PostController extends Controller
     {
         return Inertia::render('Post/List', [
             'posts' => $this->postModel->getPosts(),
+            'message' => session('message'),
         ]);
     }
 
@@ -28,15 +30,20 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Post/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $postValidated = $request->validated();
+        $createPost = Post::create($postValidated);
+        if ($createPost) {
+            return redirect()->route('posts.index')->with('message', 'Post created successfully.');
+        }
+        return abort(500, 'Post creation failed.');
     }
 
     /**
