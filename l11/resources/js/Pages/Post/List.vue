@@ -109,6 +109,18 @@
                                                         ">
                                                     Show
                                                     </Link>
+                                                    <Link :href="route(
+                                                        'posts.edit',
+                                                        post.id
+                                                    )
+                                                        ">
+                                                    Edit
+                                                    </Link>
+                                                    <DangerButton class="ml-3" @click="deletePost(
+                                                        post.id
+                                                    )">
+                                                        Del
+                                                    </DangerButton>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -125,7 +137,25 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
+import DangerButton from "@/Components/DangerButton.vue";
+
+
+const props = defineProps({
+    post: {
+        type: Object,
+    }
+});
+
+const form = useForm(props.post);
+
+const deletePost = (id) => {
+    if (confirm('Are you sure you want to delete this post?')) {
+        form.delete(route('posts.destroy', {id:id}), {
+            preserveScroll: true,
+        });
+    }
+};
 
 function padToTwoDigits(number) {
     return number.toString().padStart(2, "0");

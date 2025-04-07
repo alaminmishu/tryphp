@@ -30,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Post/Create');
+        return Inertia::render('Post/Form');
     }
 
     /**
@@ -59,24 +59,36 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        //
+        return Inertia::render('Post/Form', [
+            'post' => $post,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreRequest $request, Post $post)
     {
-        //
+        $postValidated = $request->validated();
+        $updatePost = $post->update($postValidated);
+        if ($updatePost) {
+            return redirect()->route('posts.index')->with('message', 'Post updated successfully.');
+        }
+        return abort(500, 'Post update failed.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        try {
+            $post->delete();
+            return redirect()->route('posts.index')->with('message', 'Post deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('posts.index')->with('error', 'Failed to delete post.');
+        }
     }
 }
